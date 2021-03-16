@@ -4,8 +4,8 @@
 
 ```bash
 # リモートリポジトリからクローン
-$ git clone git@github.com:unoun-dev/hanecco.git
-$ cd hanecco
+$ git clone https://github.com/kaitonishimura624/docker-laravel.git
+$ cd docker-laravel
 
 
 # 必要なコンテナを起動
@@ -63,7 +63,7 @@ $ php artisan make:model Models/User
 Dockerコマンド
 
 ```bash
-# workspaceのコンテナにアクセス
+# appのコンテナにアクセス
 $ docker-compose exec app bash
 
 # コンテナを全て停止
@@ -74,6 +74,24 @@ $ docker volume prune
 
 # Docker imageを全て削除
 $ docker image prune -a
+```
+
+mysql参照
+
+```bash
+# appのコンテナにアクセス
+$ docker-compose exec db bash
+
+# mysqlにログイン
+$ mysql -u root -p 
+password : secret
+
+# データベースを選ぶ
+$ use use laravel_local;
+
+# テーブルを選ぶ
+$ show users;
+
 ```
 
 ライブラリ
