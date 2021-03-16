@@ -1,30 +1,88 @@
 # docker-laravel 🐳
 
-![License](https://img.shields.io/github/license/ucan-lab/docker-laravel?color=f05340)
-![Stars](https://img.shields.io/github/stars/ucan-lab/docker-laravel?color=f05340)
-![Issues](https://img.shields.io/github/issues/ucan-lab/docker-laravel?color=f05340)
-![Forks](https://img.shields.io/github/forks/ucan-lab/docker-laravel?color=f05340)
-
-## Introduction
-
-Build a simple laravel development environment with docker-compose.
-
-## Usage
+ローカル環境構築手順
 
 ```bash
-$ git clone git@github.com:ucan-lab/docker-laravel.git
-$ cd docker-laravel
-$ make create-project # Install the latest Laravel project
-$ make install-recommend-packages # Not required
+# リモートリポジトリからクローン
+$ git clone git@github.com:unoun-dev/hanecco.git
+$ cd hanecco
+
+
+# 必要なコンテナを起動
+$ docker-compose up -d 
+$ docker-compose exec app bash
+
+# Laravel設定
+$ composer install
+$ composer update
+$ php artisan key:generate
+$ chmod 777 -R storage
+$ chmod 777 bootstrap/cache
+
+# マイグレーション
+$ php artisan migrate --seed --env=dev
+
+# Laravel Passport Password Grant Client の作成
+$ php artisan passport:client --password
 ```
 
-http://localhost
+マイグレーションコマンド
 
-Read this [Makefile](https://github.com/ucan-lab/docker-laravel/blob/master/Makefile).
+```bash
+# マイグレーション実行
+$ php artisan migrate
+$ php artisan migrate --seed
 
-## Tips
+# 全てのテーブルを削除してマイグレーション
+$ php artisan migrate:fresh
+$ php artisan migrate:refresh --seed
 
-Read this [Wiki](https://github.com/ucan-lab/docker-laravel/wiki).
+# マイグレーション状況のステータス確認
+$ php artisan migrate:status
+
+# ロールバック
+$ php artisan migrate:rollback
+
+# マイグレーション生成 (新規テーブルの作成)
+$ php artisan make:migration create_users_table --create=users
+
+# マイグレーション生成 (既存テーブルの更新)
+$ php artisan make:migration add_votes_to_users_table --table=users
+
+# シーダーの作成
+$ php artisan make:seeder UsersTableSeeder
+
+# シーダーの設定完了後に反映
+$ composer dump-autoload
+
+# モデルの作成
+$ php artisan make:model Models/User
+
+```
+
+Dockerコマンド
+
+```bash
+# workspaceのコンテナにアクセス
+$ docker-compose exec app bash
+
+# コンテナを全て停止
+$ docker-compose down
+
+# Docker volumeを全て削除
+$ docker volume prune
+
+# Docker imageを全て削除
+$ docker image prune -a
+```
+
+ライブラリ
+
+```bash
+# Laravel-permission
+https://spatie.be/docs/laravel-permission/v3/introduction
+
+```
 
 ## Container structure
 
