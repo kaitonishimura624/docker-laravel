@@ -23,8 +23,6 @@ $ chmod 777 bootstrap/cache
 # マイグレーション
 $ php artisan migrate --seed --env=dev
 
-# Laravel Passport Password Grant Client の作成
-$ php artisan passport:client --password
 ```
 
 マイグレーションコマンド
