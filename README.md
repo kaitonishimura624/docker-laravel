@@ -6,6 +6,7 @@
 # リモートリポジトリからクローン
 $ git clone https://github.com/kaitonishimura624/docker-laravel.git
 $ cd docker-laravel
+$ composer create-project "laravel/laravel=6.*" backend --prefer-dist #backendというプロジェクトの作成
 
 
 # 必要なコンテナを起動
